@@ -154,45 +154,20 @@ SELECT DISTINCT country, TRIM(TRAILING '.' FROM country)
 FROM [Portfolio project]..layoffs_staging
 ORDER BY 1;
 
---date column is a varchar(50), which means it is a varchar column, to change it into a date column
-SELECT date FROM [Portfolio project]..layoffs_staging;
+-- to remove unimport columns
 
-SELECT CONVERT(DATE, date, 105)
+SELECT *
+FROM [Portfolio project]..layoffs_staging;
+WHERE total_laid_off IS NULL;
 
-ALTER TABLE layoffs_staging
-ADD date_converted DATE;
+SELECT *
+FROM [Portfolio project]..layoffs_staging;
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
 
-UPDATE layoffs_staging
-SET date_converted = CONVERT(DATE, date, 104)
-
-SELECT * FROM [Portfolio project]..layoffs_staging
-
-SELECT date, PARSE(date AS date) FROM [Portfolio project]..layoffs_staging;
-
-SELECT date, CONVERT(DATE, date, 105) FROM [Portfolio project]..layoffs_staging;
-
+-- to Delete away unimportant column data we can't really use
+DELETE FROM world_layoffs.layoffs_staging2
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
 
 SELECT * FROM [Portfolio project]..layoffs_staging;
-
-
-
-SELECT * FROM [Portfolio project]..layoffs_staging
-WHERE industry IS NULL
-OR industry = '';
-
-SELECT * FROM [Portfolio project]..layoffs_staging
-WHERE company = 'Airbnb';
-
-
-
-
-
-
-
-
-
-SELECT * FROM [Portfolio project]..layoffs_staging
-
-
-
-
