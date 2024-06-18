@@ -14,11 +14,7 @@ SELECT * FROM layoffs_stagging2
 WHERE percentage_laid_off = 1
 ORDER BY total_laid_off DESC;
 
-SELECT company, SUM(total_laid_off) FROM layoffs_stagging2
-GROUP BY company
-ORDER BY 2 DESC;
-
--- dataset contains 3 years of retrenchment data
+-- dataset contains 3 years of retrenchment data, Mar 2020 to June 2023
 SELECT MIN(date), MAX(date) FROM layoffs_stagging2;
 
 -- to see which industry got deeply affected the most
@@ -26,12 +22,12 @@ SELECT industry, SUM(total_laid_off) FROM layoffs_stagging2
 GROUP BY industry
 ORDER BY 2 DESC;
 
--- to see which countries that are most affected by tech layoffs
+-- to see which countries that are most affected by tech layoffs. Countries most affected are USA, India and Netherlands
 SELECT country, SUM(total_laid_off) FROM layoffs_stagging2
 GROUP BY country
 ORDER BY 2 DESC;
 
--- to see total laid off by Date
+-- to see total laid off by Date, Year 2022 saw 160,322 being made redundant from their jobs.
 SELECT date, SUM(total_laid_off) FROM layoffs_stagging2
 GROUP BY date
 ORDER BY 2 DESC;
@@ -41,6 +37,7 @@ SELECT YEAR(date), SUM(total_laid_off) FROM layoffs_stagging2
 GROUP BY YEAR(date)
 ORDER BY 1 DESC;
 
+-- Amazon laid off the most no.of employees (18,150), followed by Google (12,000) and Meta (1,100)
 SELECT company, SUM(total_laid_off) FROM layoffs_stagging2
 GROUP BY company
 ORDER BY 2 DESC;
@@ -69,7 +66,7 @@ GROUP BY company, YEAR(date)
 ORDER BY company;
 
 -- to rank by total no. of employees(3) laid off
--- Google fired 12000 employees in 2023, Meta fired 11000 employees in 2022
+-- Google fired 12,000 employees in 2023, Meta fired 11,000 employees in 2022, Amazon fired 10,150 employees in 2022
 SELECT company, YEAR(date), SUM(total_laid_off) FROM layoffs_stagging2
 GROUP BY company, YEAR(date)
 ORDER BY 3 DESC;
